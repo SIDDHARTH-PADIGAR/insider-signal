@@ -2,7 +2,7 @@
 
 A live pipeline that pulls real SEC insider-trading filings, detects when
 multiple company insiders buy stock in a short window ("cluster buys"),
-and tests — with actual statistics, not a vibe check — whether that
+and tests with actual statistics, not a vibe check — whether that
 predicts the stock outperforming the market afterward.
 
 **This is a quantitative research pipeline, not a trained ML model.**
@@ -16,7 +16,7 @@ trained model" below for the reasoning.
 
 Academic finance research has repeatedly found that when several
 insiders at the same company buy stock with their own money in a short
-window, it's a weak but real positive signal — insiders have information
+window, it's a weak but real positive signal, insiders have information
 outsiders don't. This project builds a live tool to detect that pattern
 and test whether it holds on recent, real data.
 
@@ -29,8 +29,8 @@ and test whether it holds on recent, real data.
 | 20 days | +2.44% | 24 | 0.296 | No |
 | 30 days | +1.44% | 23 | 0.573 | No |
 
-**Every horizon is directionally positive — consistent with the
-hypothesis — but none reach conventional statistical significance.**
+**Every horizon is directionally positive consistent with the
+hypothesis but none reach conventional statistical significance.**
 This is an honest, real result, not a shortfall to apologize for: it
 matches the pattern in published insider-trading literature, where this
 effect is real but small, and typically only reaches significance with
@@ -80,7 +80,7 @@ uvicorn src.api:app --reload --port 8001
 
 **Why open-market purchases only (transaction code 'P'), not all "acquired" transactions.**
 Raw Form 4 data is dominated by option exercises, RSU vesting, and
-tax-withholding transactions — routine compensation mechanics, not a
+tax-withholding transactions routine compensation mechanics, not a
 choice. Of 16,389 transactions pulled, only 30 were genuine 'P' codes.
 Filtering to just 'P' is what makes this a real conviction signal
 instead of noise from payroll events.
@@ -93,17 +93,17 @@ Rather than switch to companies already known for frequent insider
 activity (which would bias the study toward finding a signal because the
 sample was picked to contain it), I pulled the full, current S&P 500
 constituent list from a standard public source and ran the same,
-unbiased detection logic across all 500 — more legitimate events from a
+unbiased detection logic across all 500, more legitimate events from a
 wider net, not a rigged sample.
 
 **Why no trained ML model.**
 With only 31 detected events, any train/test split leaves ~20 training
-rows — nowhere near enough to fit a classifier without it just
+rows, nowhere near enough to fit a classifier without it just
 memorizing noise. Rather than build a "trained model" that would be
 untrustworthy with this little data, this project stays honest about
 what it is: a statistically rigorous detection and testing pipeline. The
-natural extension — a supervised classifier predicting cluster-buy
-outcomes from features like insider count, dollar value, and sector — is
+natural extension, a supervised classifier predicting cluster-buy
+outcomes from features like insider count, dollar value, and sector is
 a legitimate next step once enough events accumulate over a longer
 collection window.
 
@@ -118,7 +118,7 @@ which may have the same quirk.
 **Known limitation: NaN handling in recent events.**
 Events too recent to have a full 20 or 30 trading days of subsequent
 price history return `null` for those specific horizons rather than
-being dropped entirely — you'll see partial data for the newest cluster
+being dropped entirely you'll see partial data for the newest cluster
 events in the dashboard, which is expected, not a bug.
 
 ## Next steps (not yet built)
