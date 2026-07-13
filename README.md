@@ -2,13 +2,13 @@
 
 A live pipeline that pulls real SEC insider-trading filings, detects when
 multiple company insiders buy stock in a short window ("cluster buys"),
-and tests with actual statistics, not a vibe check — whether that
+and tests with actual statistics, not a vibe check whether that
 predicts the stock outperforming the market afterward.
 
 **This is a quantitative research pipeline, not a trained ML model.**
 Detection is rule-based, the CAR calculation is a formula, and the
 signal test is a classical hypothesis test (one-sample t-test). Stating
-that plainly rather than dressing it up — the value here is the data
+that plainly rather than dressing it up the value here is the data
 engineering and statistical rigor, not a black-box model. See "Why no
 trained model" below for the reasoning.
 
